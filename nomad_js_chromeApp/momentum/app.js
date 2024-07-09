@@ -1,7 +1,13 @@
-const daysOfWeek = ["mon", "tue", "wed", "thu", "fri", "sat"];
+const player = {
+  name: "nico",
+  points: 10,
+  fat: true,
+};
+console.log(player);
+console.log(player["name"]);
 
-console.log(daysOfWeek);
+// add new in object
+player.lastName = "potato"
 
-daysOfWeek.push("sun");
-
-console.log(daysOfWeek);
+player.points += 15
+console.log(player)
