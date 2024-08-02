@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+  </head>
+  <body>
+    <span>Total click : 0</span>
+    <button id="btn">Clike me</button>
+  </body>
+  <script>
+    let counter = 0;
+    const button = document.querySelector("#btn");
+    const span = document.querySelector("span")
+    function handleClick() {
+      counter += 1;
+      span.innerText = `Total click : ${counter}`;
+    }
+    button.addEventListener("click", handleClick);
+  </script>
+</html>
