@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Unit Conversion</title>
+    <link href="unitConversion.css" rel="stylesheet">
   </head>
   <body>
     <div id="root"></div>
@@ -54,11 +55,49 @@
         </div>
       )
     };
+    
     function KmToMiles() {
+      const [amount, setAmount] =React.useState(0);
+      const [inverted, setInverted] =React.useState(false);
+      const onChange = () => {
+        setAmount(event.target.value);
+      };
+      const reset = () => setAmount(0);
+      const onInverted = () => {
+        setInverted((current) => !current)
+        reset();
+      };
+
       return (
-        <h3>KM 2 M</h3>
-      );
+        <div>
+          <div>
+            <label htmlFor="KiloMeters">KiloMeters</label>
+            <input 
+              value={inverted ?  amount * 1.609 : amount}
+              id="KiloMeters" 
+              placeholder="KiloMeters" 
+              type="Number" 
+              onChange={onChange}
+              disabled={inverted}
+            />
+          </div>
+          <div>
+            <label htmlFor="Miles">Miles</label>
+            <input 
+              value={inverted ? amount : amount / 1.609}
+              id="Miles"
+              placeholder="Miles" 
+              type="Number" 
+              onChange={onChange}
+              disabled={!inverted}
+            />
+          </div>
+          <button onClick={reset}>Reset</button>
+          <button onClick={onInverted}>{inverted ? "Trun back" : "Invert"}</button>
+        </div>
+      )
     }
+    
     function App() {
       const [index, setIndex] = React.useState("xx");
       const onSelect = () => {
