@@ -8,23 +8,43 @@
   <body>
     <div id="root"></div>
   </body>
-  <script src="https://unpkg.com/react@17.0.2/umd/react.production.min.js"></script>
+  <script src="https://unpkg.com/react@17.0.2/umd/react.development.js"></script>
   <script src="https://unpkg.com/react-dom@17.0.2/umd/react-dom.production.min.js"></script>
+  <script src="https://unpkg.com/prop-types@15.7.2/prop-types.js"></script>
   <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
   <script type="text/babel">
-    const root = document.querySelector("#root");
+    function Btn({ btnInnerText, changeValue , bgColor}) {
+      return (
+        <button
+          onClick={changeValue} 
+          style={{
+            backgroundColor: bgColor ,
+            color: "white",
+            padding: "10px 20px",
+            border: 0,
+            borderRadius: 10,
+          }}
+        >
+          {btnInnerText}
+        </button>
+      );
+    };
+    Btn.PropTypes = {
+      btnInnerText: PropTypes.string.isRequired,
+      changeValue: PropTypes.func ,
+      bgColor: PropTypes.string.isRequired,
+    };
     function App() {
-      const [counter, setCounter] = React.useState(0);
-      const onClick = () => {
-        setCounter(counter + 1)
-      };
+      const [value, setValue] = React.useState("Save Changes");
+      const changeValue = () => setValue("Revert Changes");
       return (
         <div>
-          <h3>Total clicks : {counter}</h3>
-          <button onClick={onClick}>Click Me</button>
+          <Btn btnInnerText={value} changeValue={changeValue} bgColor="tomato" />
+          <Btn btnInnerText="Continue" bgColor="green"/>
         </div>
-      )
+      );
     };
+    const root = document.querySelector("#root");
     ReactDOM.render(<App />, root);
   </script>
 </html>
