@@ -22,7 +22,7 @@ export default function Movie({poster_path, title, id}: MovieProps) {
         alt={title}
         onClick={onClick}
       />
-      <Link href={`/movies/${id}`}>{title}</Link>
+      <Link prefetch href={`/movies/${id}`}>{title}</Link>
     </div>
   );
 }
