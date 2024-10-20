@@ -1,4 +1,6 @@
-import { API_URL } from '../../../(home)/page';
+import { Suspense } from "react";
+import MovieInfo from "../../../../components/movie-info";
+import MovieVideos from "../../../../components/movie-videos";
 
 interface MovieDetailProps {
   params: {
@@ -6,29 +8,18 @@ interface MovieDetailProps {
   };
 }
 
-async function getMovie(id: string) {
-  console.log(`Fetching movies: ${Date.now()}`);
-  await new Promise((resolve) => setTimeout(resolve, 5000));
-  const response = await fetch(API_URL + `/${id}`);
-  return await response.json();
-}
-
-async function getVideos(id: string) {
-  console.log(`Fetching videos: ${Date.now()}`);
-  await new Promise((resolve) => setTimeout(resolve, 5000));
-  const response = await fetch(API_URL + `/${id}/videos`);
-  return await response.json();
-}
-
 export default async function MovieDetail({params: {id}}: MovieDetailProps) {
-  console.log('======================');
-  console.log('start fetching');
-  // const movie = await getMovie(id);
-  // const videos = await getVideos(id);
-  const [movie, videos ] = await Promise.all([getMovie(id), getVideos(id)])
 
   console.log('end fetching');
   return (
-    <h1>{movie.title}</h1>
+    <div>
+      <h3>Movie detail page</h3>
+      <Suspense fallback={<h2>Loading movie id...</h2>}>
+        <MovieInfo id={id} />
+      </Suspense>
+      <Suspense fallback={<h2>Loading movie videos...</h2>}>
+        <MovieVideos id={id} />
+      </Suspense>
+    </div>
   );
 }
